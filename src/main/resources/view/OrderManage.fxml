@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="447.0" prefWidth="1107.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ijse.edu.main.samagicinnamonmerchant.controller.OrderManageController">
+   <children>
+      <AnchorPane prefHeight="55.0" prefWidth="1118.0" style="-fx-background-color: #1e272e;">
+         <children>
+            <Label alignment="CENTER" layoutX="477.0" layoutY="10.0" text="Order FORM" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <Text layoutX="437.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="OrderId" wrappingWidth="69.13671875">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text layoutX="40.0" layoutY="365.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Status" wrappingWidth="137.13671875">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <TextField fx:id="txtItemId" layoutX="414.0" layoutY="321.0" onAction="#txtOnActionItemId" prefHeight="25.0" prefWidth="79.0" />
+      <TextField fx:id="txtOnHandWeight" layoutX="196.0" layoutY="346.0" onAction="#txtOnActionOnHandWeight" prefHeight="25.0" prefWidth="109.0" />
+      <Text layoutX="339.0" layoutY="353.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ItemId" wrappingWidth="69.13671875">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <TextField fx:id="txtItemId" layoutX="138.0" layoutY="75.0" onAction="#txtOnActionItemId" prefHeight="25.0" prefWidth="79.0" />
+      <Text layoutX="22.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customer Id" wrappingWidth="108.99999999999994">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <TextField layoutX="513.0" layoutY="75.0" onAction="#txtOnActionOrderId" prefHeight="25.0" prefWidth="79.0" />
+      <Text layoutX="803.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HandOverDate" wrappingWidth="137.13671875">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <TextField layoutX="319.0" layoutY="75.0" onAction="#txtOnActionWight" prefHeight="25.0" prefWidth="95.0" />
+      <Text layoutX="634.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date" wrappingWidth="69.13671875">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <TextField fx:id="txtItemId1111" layoutX="940.0" layoutY="75.0" onAction="#txtOnActionItemId" prefHeight="25.0" prefWidth="79.0" />
+      <Text layoutX="235.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Weight" wrappingWidth="69.13671875">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <TextField layoutX="685.0" layoutY="75.0" onAction="#txtOnActionDate" prefHeight="25.0" prefWidth="79.0" />
+   </children>
+</AnchorPane>

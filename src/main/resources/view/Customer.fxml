@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="495.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ijse.edu.main.samagicinnamonmerchant.controller.CustomerContoller">
+   <children>
+      <Text layoutX="28.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customer Id" wrappingWidth="109.13671875">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text layoutX="327.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" wrappingWidth="53.13671875">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text layoutX="673.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email" wrappingWidth="70.13671875">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text layoutX="30.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NIC" wrappingWidth="53.13671875">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text layoutX="358.0" layoutY="158.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone" wrappingWidth="79.13671875">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <TableView fx:id="tblCustomer" layoutX="14.0" layoutY="236.0" onMouseClicked="#onMouseClickTblCustomer" prefHeight="263.0" prefWidth="733.0">
+        <columns>
+          <TableColumn fx:id="ColCustomerId" prefWidth="85.0" text="CustomerId" />
+          <TableColumn fx:id="ColName" prefWidth="125.0" text="Name" />
+            <TableColumn fx:id="ColAddress" prefWidth="128.0" text="Address" />
+            <TableColumn fx:id="ColContact" prefWidth="138.0" text="Phone" />
+            <TableColumn fx:id="ColNIC" prefWidth="114.0" text="NIC" />
+            <TableColumn fx:id="ColEmail" prefWidth="142.0" text="Email" />
+        </columns>
+      </TableView>
+      <TextField fx:id="txtCustomerId" layoutX="136.0" layoutY="80.0" onAction="#txtOnActionCustomerId" prefHeight="25.0" prefWidth="70.0" />
+      <TextField fx:id="txtName" layoutX="398.0" layoutY="80.0" onAction="#txtOnActionName" prefHeight="25.0" prefWidth="166.0" />
+      <TextField fx:id="txtNic" layoutX="96.0" layoutY="139.0" onAction="#txtOnActionNic" prefHeight="25.0" prefWidth="177.0" />
+      <TextField fx:id="txtEmail" layoutX="747.0" layoutY="77.0" onAction="#txtOnActionEmail" prefHeight="25.0" prefWidth="198.0" />
+      <TextField fx:id="txtPhone" layoutX="437.0" layoutY="138.0" onAction="#txtOnActionPhone" prefHeight="25.0" prefWidth="198.0" />
+      <Button fx:id="btnDelete" layoutX="357.0" layoutY="185.0" mnemonicParsing="false" onAction="#btnOnActionDelete" prefHeight="39.0" prefWidth="109.0" style="-fx-background-color: red; -fx-border-radius: 10;" text="Delete">
+         <font>
+            <Font name="System Bold Italic" size="18.0" />
+         </font></Button>
+      <Button fx:id="btnUpdate" layoutX="203.0" layoutY="185.0" mnemonicParsing="false" onAction="#btnOnActionUpdate" prefHeight="39.0" prefWidth="92.0" style="-fx-background-color: #3498db;" text="Update">
+         <font>
+            <Font name="System Bold Italic" size="18.0" />
+         </font></Button>
+      <Button fx:id="btnReset" layoutX="531.0" layoutY="185.0" mnemonicParsing="false" onAction="#btnOnActionReset" prefHeight="25.0" prefWidth="109.0" style="-fx-background-color: #7f8c8d;" text="Clear">
+         <font>
+            <Font name="System Bold Italic" size="18.0" />
+         </font></Button>
+      <Button fx:id="btnSave" layoutX="57.0" layoutY="185.0" mnemonicParsing="false" onAction="#btnOnActionSave" prefHeight="39.0" prefWidth="92.0" style="-fx-background-color: #009e05;" text="Save">
+         <font>
+            <Font name="System Bold Italic" size="18.0" />
+         </font></Button>
+      <Text layoutX="708.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address" wrappingWidth="109.13671875">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <TextField fx:id="txtAddress" layoutX="818.0" layoutY="138.0" onAction="#txtOnActionNic" prefHeight="25.0" prefWidth="205.0" />
+      <ImageView fitHeight="382.0" fitWidth="332.0" layoutX="747.0" layoutY="164.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/customerImg.png" />
+         </image>
+      </ImageView>
+      <AnchorPane prefHeight="53.0" prefWidth="1109.0" style="-fx-background-color: #1e272e;">
+         <children>
+            <Label alignment="CENTER" layoutX="423.0" layoutY="9.0" text="Customer FORM" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

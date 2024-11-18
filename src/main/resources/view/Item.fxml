@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ijse.edu.main.samagicinnamonmerchant.controller.ItemController">
+   <children>
+      <AnchorPane fx:id="AnchorPaneItem" layoutX="2.0" onDragDetected="#btnOnActionSave" prefHeight="447.0" prefWidth="1107.0">
+         <children>
+            <Text layoutX="31.0" layoutY="306.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ItemId :-" wrappingWidth="79.0">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <Text fx:id="txtName" layoutX="364.0" layoutY="355.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type  :-" wrappingWidth="69.13671874999997">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <Text layoutX="274.0" layoutY="307.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ItemName  :-" wrappingWidth="115.13671875">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <Text layoutX="50.0" layoutY="354.0" strokeType="OUTSIDE" strokeWidth="0.0" text="OnHandWeight :-" wrappingWidth="156.13671875">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <TableView fx:id="tblItem" layoutX="30.0" layoutY="63.0" prefHeight="200.0" prefWidth="508.0">
+               <columns>
+                  <TableColumn fx:id="colItemId" prefWidth="110.0" text="ItemId" />
+                  <TableColumn fx:id="colType" prefWidth="124.0" text="Type" />
+                  <TableColumn fx:id="colOnHandWeight" prefWidth="137.0" text="OnHandWeight" />
+                  <TableColumn fx:id="colItemName" prefWidth="137.0" text="ItemName" />
+               </columns>
+            </TableView>
+            <TextField fx:id="txtItemId" layoutX="128.0" layoutY="288.0" onAction="#txtOnActionItemId" prefHeight="25.0" prefWidth="79.0" />
+            <TextField fx:id="txtItemName" layoutX="404.0" layoutY="287.0" onAction="#txtOnActionItemName" prefHeight="25.0" prefWidth="184.0" />
+            <TextField fx:id="txtOnHandWeight" layoutX="220.0" layoutY="335.0" onAction="#txtOnActionOnHandWeight" prefHeight="25.0" prefWidth="109.0" />
+            <Button fx:id="btnDelete" layoutX="433.0" layoutY="388.0" mnemonicParsing="false" onAction="#btnOnActionDelete" prefHeight="39.0" prefWidth="125.0" style="-fx-background-color: red;" text="Delete">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font></Button>
+            <Button fx:id="btnUpdate" layoutX="256.0" layoutY="388.0" mnemonicParsing="false" onAction="#btnOnActionUpdate" prefHeight="39.0" prefWidth="125.0" style="-fx-background-color: #3498db;" text="Update">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font></Button>
+            <Button fx:id="btnAddItem" layoutX="70.0" layoutY="388.0" mnemonicParsing="false" onAction="#btnOnActionAddItem" prefHeight="34.0" prefWidth="137.0" style="-fx-background-color: #009e05;" text="Add Item">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font></Button>
+            <ImageView fitHeight="326.0" fitWidth="377.0" layoutX="690.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/item.png" />
+               </image>
+            </ImageView>
+            <AnchorPane layoutX="-281.0" prefHeight="53.0" prefWidth="1389.0" style="-fx-background-color: #1e272e;">
+               <children>
+                  <Label alignment="CENTER" layoutX="768.0" layoutY="9.0" text="Item FORM" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <JFXComboBox fx:id="comBoxType" layoutX="433.0" layoutY="335.0" onAction="#comBoxOnActionType" prefHeight="25.0" prefWidth="128.0" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

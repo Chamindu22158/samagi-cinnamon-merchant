@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ijse.edu.main.samagicinnamonmerchant.controller.PaymentInfoFormController">
+   <children>
+      <AnchorPane prefHeight="52.0" prefWidth="935.0" style="-fx-background-color: #1e272e;">
+         <children>
+            <Label alignment="CENTER" layoutX="339.0" layoutY="9.0" text="PaymentInfo FORM" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <Label layoutX="574.0" layoutY="66.0" prefHeight="26.0" prefWidth="94.0" text="Order No. :-">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblOrderNo" layoutX="668.0" layoutY="66.0" prefHeight="26.0" prefWidth="178.0" text=" -" textFill="#ff000d">
+         <font>
+            <Font name="System Bold Italic" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="574.0" layoutY="110.0" prefHeight="26.0" prefWidth="66.0" text="Date :-">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblDate" layoutX="640.0" layoutY="110.0" prefHeight="26.0" prefWidth="170.0">
+         <font>
+            <Font name="System Bold Italic" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="37.0" layoutY="85.0" prefHeight="26.0" prefWidth="116.0" text="Payment No. :-">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblPaymentNo" layoutX="172.0" layoutY="85.0" prefHeight="26.0" prefWidth="218.0" text=" -" textFill="#341f97">
+         <font>
+            <Font name="System Bold Italic" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="29.0" layoutY="159.0" prefHeight="34.0" prefWidth="178.0" text="Total Amount :-">
+         <font>
+            <Font name="System Bold" size="23.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblTotalAmount" layoutX="247.0" layoutY="167.0" prefHeight="34.0" prefWidth="306.0" text=" -" textFill="#27ae60">
+         <font>
+            <Font name="System Bold" size="23.0" />
+         </font>
+      </Label>
+      <Label layoutX="33.0" layoutY="252.0" prefHeight="26.0" prefWidth="150.0" text="Pay Amount (Rs.) :-">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtPayAmount" layoutX="212.0" layoutY="248.0" prefHeight="34.0" prefWidth="170.0">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </TextField>
+      <Label layoutX="43.0" layoutY="325.0" prefHeight="26.0" prefWidth="129.0" text="Payment Type :-">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="64.0" layoutY="429.0" prefHeight="26.0" prefWidth="108.0" text="Description :-">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <TextArea fx:id="txtAreaDescription" layoutX="172.0" layoutY="428.0" prefHeight="71.0" prefWidth="291.0">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </TextArea>
+      <JFXButton buttonType="RAISED" layoutX="281.0" layoutY="525.0" onAction="#btnOnActionPayNow" prefHeight="20.0" prefWidth="150.0" ripplerFill="#009e05" style="-fx-background-color: #009e05;" text="Pay Now" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </JFXButton>
+      <JFXComboBox fx:id="comboPayment" layoutX="197.0" layoutY="326.0" prefHeight="25.0" prefWidth="150.0" />
+      <ImageView fitHeight="405.0" fitWidth="445.0" layoutX="474.0" layoutY="154.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="469.0" fitWidth="461.0" layoutX="486.0" layoutY="140.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/pay.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
