@@ -12,6 +12,6 @@ import lombok.*;
 public class ItemDTO {
     private String itemId;
     private String itemName;
-    private double onHandWeight;
     private String type;
+    private double onHandWeight;
 }

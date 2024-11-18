@@ -20,6 +20,7 @@ import javafx.scene.text.Text;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class ItemController  implements Initializable {
@@ -52,10 +53,11 @@ public class ItemController  implements Initializable {
     private TableColumn<?, ?> colType;
 
     @FXML
-    private JFXComboBox<?> comBoxType;
+    private JFXComboBox<String> comBoxType;
 
     @FXML
-    private TextField txtItemId;
+    private TextField txtId;
+
 
     @FXML
     private TextField txtItemName;
@@ -69,8 +71,9 @@ public class ItemController  implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         colItemId.setCellValueFactory(new PropertyValueFactory<>("itemId"));
         colItemName.setCellValueFactory(new PropertyValueFactory<>("itemName"));
-        colOnHandWeight.setCellValueFactory(new PropertyValueFactory<>("onHandWeight"));
         colType.setCellValueFactory(new PropertyValueFactory<>("type"));
+        colOnHandWeight.setCellValueFactory(new PropertyValueFactory<>("onHandWeight"));
+
         try {
             refreshPage();
         } catch (SQLException e) {
@@ -79,18 +82,30 @@ public class ItemController  implements Initializable {
         }
     }
     private void refreshPage() throws SQLException {
+
+        txtId.setText("");
+        txtItemName.setText("");
+        comBoxType.setValue(null);
+        txtOnHandWeight.setText("");
+
         loadNextItemId();
         loadTableData();
+        loadTypeToComBox();
 
-        txtItemId.setText("");
-        txtItemName.setText("");
-        txtOnHandWeight.setText("");
-        comBoxType.setValue(null);
 
     }
+
+    private void loadTypeToComBox() {
+        ObservableList<String> types = FXCollections.observableArrayList();
+        types.add("Cinnamon");
+        types.add("Other");
+
+        comBoxType.setItems(types);
+    }
+
     public void loadNextItemId() throws SQLException {
         String nextItemId = ItemModel.getNextItemId();
-        txtItemId.setText(nextItemId);
+        txtId.setText( ItemModel.getNextItemId());
     }
     ItemModel itemModel = new ItemModel();
     private void loadTableData() throws SQLException {
@@ -99,11 +114,13 @@ public class ItemController  implements Initializable {
         ObservableList<ItemTM> itemTMS = FXCollections.observableArrayList();
 
         for (ItemDTO itemDTO : itemDTOS) {
+
            ItemTM itemTM = new ItemTM(
                     itemDTO.getItemId(),
                     itemDTO.getItemName(),
-                    itemDTO.getOnHandWeight(),
-                    itemDTO.getType()
+                    itemDTO.getType(),
+                   itemDTO.getOnHandWeight()
+
             );
             itemTMS.add(itemTM);
         }
@@ -111,11 +128,11 @@ public class ItemController  implements Initializable {
     }
     @FXML
     void btnOnActionAddItem(ActionEvent event)  throws SQLException{
-        String itemId = txtItemId.getText();
+        String itemId = txtId.getText();
         String itemName = txtItemName.getText();
         double onHandWeight = Double.parseDouble(txtOnHandWeight.getText());
-        String type = comBoxType.getValue().toString();
-        ItemDTO itemDTO = new ItemDTO(itemId, itemName, onHandWeight, type);
+        String type = comBoxType.getValue();
+        ItemDTO itemDTO = new ItemDTO(itemId, itemName, type, onHandWeight);
 
         boolean isSaved = ItemModel.saveItem(itemDTO);
         if (isSaved) {
@@ -127,8 +144,22 @@ public class ItemController  implements Initializable {
     }
 
     @FXML
-    void btnOnActionDelete(ActionEvent event) {
+    void btnOnActionDelete(ActionEvent event) throws SQLException {
+        String itemId = txtId.getText();
 
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure?", ButtonType.OK, ButtonType.CANCEL);
+        Optional<ButtonType> optionalButtonType = alert.showAndWait();
+
+        if (optionalButtonType.isPresent() && optionalButtonType.get() == ButtonType.OK) {
+            boolean isDeleted = itemModel.deleteItem(itemId);
+            if (isDeleted) {
+                refreshPage();
+                new Alert(Alert.AlertType.CONFIRMATION, "Item Deleted").show();
+
+            } else {
+                new Alert(Alert.AlertType.ERROR, "Fail to delete Item").show();
+            }
+        }
     }
 
     @FXML
@@ -137,10 +168,32 @@ public class ItemController  implements Initializable {
     }
 
     @FXML
-    void btnOnActionUpdate(ActionEvent event) {
+    void btnOnActionUpdate(ActionEvent event) throws SQLException {
+        String itemId = txtId.getText();
+        String itemName = txtItemName.getText();
+        String type = comBoxType.getValue().toString();
+        double onHandWeight = Double.parseDouble(txtOnHandWeight.getText());
 
+        ItemDTO itemDTO = new ItemDTO(itemId, itemName, type, onHandWeight);
+
+        boolean isUpdated = ItemModel.updateItem(itemDTO);
+        if (isUpdated) {
+            new Alert(Alert.AlertType.CONFIRMATION, "Item Updated").show();
+            refreshPage();
+        } else {
+            new Alert(Alert.AlertType.ERROR, "Fail to update Item").show();
+        }
     }
-
+    @FXML
+    void onMouseClickTblItem(MouseEvent event) {
+        ItemTM itemTM = tblItem.getSelectionModel().getSelectedItem();
+        if(itemTM != null){
+            txtId.setText(itemTM.getItemId());
+            txtItemName.setText(itemTM.getItemName());
+            comBoxType.setValue(itemTM.getType());
+            txtOnHandWeight.setText(String.valueOf(itemTM.getOnHandWeight()));
+        }
+    }
     @FXML
     void comBoxOnActionType(ActionEvent event) {
 

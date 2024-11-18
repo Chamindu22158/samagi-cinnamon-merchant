@@ -1,6 +1,6 @@
 package ijse.edu.main.samagicinnamonmerchant.model;
 
-import ijse.edu.main.samagicinnamonmerchant.dto.CustomerDTO;
+
 import ijse.edu.main.samagicinnamonmerchant.dto.ItemDTO;
 import ijse.edu.main.samagicinnamonmerchant.util.CrudUtil;
 
@@ -11,11 +11,11 @@ import java.util.ArrayList;
 public class ItemModel {
     public static boolean saveItem(ItemDTO ItemDTO) throws SQLException {
         boolean isSaved = CrudUtil.execute(
-                "INSERT INTO customer VALUES(?,?,?,?)",
+                "INSERT INTO item (itemId,itemName,type,onHandWeight) VALUES(?,?,?,?)",
                 ItemDTO.getItemId(),
                 ItemDTO.getItemName(),
-                ItemDTO.getOnHandWeight(),
-                ItemDTO.getType());
+                ItemDTO.getType(),
+                ItemDTO.getOnHandWeight());
         return isSaved;
     }
     public static String getNextItemId() throws SQLException {
@@ -26,11 +26,24 @@ public class ItemModel {
             String substring = lastId.substring(1); // 002
             int i = Integer.parseInt(substring); // 2
             int newIdIndex = i+1; // 3
-
-            return String.format("C%03d",newIdIndex);
+            System.out.println(String.format("I%03d",newIdIndex));
+            return String.format("I%03d",newIdIndex);
         }
-        return  "C001";
+        System.out.println("I001");
+        return  "I001";
     }
+
+    public static boolean updateItem(ItemDTO itemDTO) throws SQLException {
+        boolean isUpdated = CrudUtil.execute(
+                "UPDATE Item SET itemName=?, type=?, onHandWeight=? WHERE itemId=?",
+                itemDTO.getItemName(),
+                itemDTO.getType(),
+                itemDTO.getOnHandWeight(),
+                itemDTO.getItemId()
+        );
+        return isUpdated;
+    }
+
     public ArrayList<ItemDTO> getAllItems() throws SQLException {
         ResultSet rst =  CrudUtil.execute("select * from Item");
 
@@ -40,12 +53,15 @@ public class ItemModel {
             ItemDTO itemDTO = new ItemDTO(
                     rst.getString(1),
                     rst.getString(2),
-                    rst.getDouble(3),
-                    rst.getString(4)
+                    rst.getString(3),
+                    rst.getDouble(5)
 
             );
             itemDTOS.add(itemDTO);
         }
         return itemDTOS;
+    }
+    public static boolean deleteItem(String itemId) throws SQLException {
+        return CrudUtil.execute("delete from item where itemId=?",itemId);
     }
 }
