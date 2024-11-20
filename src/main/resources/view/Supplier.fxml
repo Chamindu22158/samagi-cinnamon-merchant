@@ -49,9 +49,9 @@
          </font>
       </Text>
       <TextField fx:id="txtAddress" layoutX="794.0" layoutY="78.0" onAction="#txtOnActionAddress" prefHeight="25.0" prefWidth="159.0" />
-      <TableView fx:id="tblCustomer" layoutX="24.0" layoutY="246.0" onMouseClicked="#onMouseClickTblSupplier" prefHeight="225.0" prefWidth="733.0">
+      <TableView fx:id="tblSupplier" layoutX="24.0" layoutY="246.0" onMouseClicked="#onMouseClickedSupplier" prefHeight="225.0" prefWidth="732.0">
          <columns>
-            <TableColumn fx:id="ColCustomerId" prefWidth="85.0" text="CustomerId" />
+            <TableColumn fx:id="ColSupplierId" prefWidth="85.0" text="SupplierId" />
             <TableColumn fx:id="ColName" prefWidth="125.0" text="Name" />
             <TableColumn fx:id="ColAddress" prefWidth="119.0" text="Address" />
             <TableColumn fx:id="ColContact" prefWidth="133.0" text="Contact" />
@@ -88,7 +88,7 @@
             <Font name="System Bold Italic" size="18.0" />
          </font>
       </Button>
-      <ImageView fitHeight="295.0" fitWidth="340.0" layoutX="759.0" layoutY="183.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="295.0" fitWidth="340.0" layoutX="764.0" layoutY="183.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../image/supplier.png" />
          </image>

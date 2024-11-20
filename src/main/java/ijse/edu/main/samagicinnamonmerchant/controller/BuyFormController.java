@@ -1,22 +1,30 @@
 package ijse.edu.main.samagicinnamonmerchant.controller;
 
 import com.jfoenix.controls.JFXComboBox;
+import ijse.edu.main.samagicinnamonmerchant.model.SupplierItemModel;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+import java.sql.SQLException;
+import java.util.ResourceBundle;
 
-public class BuyFormController {
+public class BuyFormController implements Initializable {
 
+    @FXML
+    private AnchorPane buyPain;
     @FXML
     private TableColumn<?, ?> colBuyingPrice;
 
@@ -64,10 +72,37 @@ public class BuyFormController {
 
     @FXML
     private TextField txtCuttingAmount;
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        colProductType.setCellValueFactory(new PropertyValueFactory<>("productType"));
+        colWeight.setCellValueFactory(new PropertyValueFactory<>("weight"));
+        colBuyingPrice.setCellValueFactory(new PropertyValueFactory<>("buyingPrice"));
+        colCuttingAmount.setCellValueFactory(new PropertyValueFactory<>("cuttingAmount"));
+        colNetWeight.setCellValueFactory(new PropertyValueFactory<>("netWeight"));
+        colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
+        colTotal.setCellValueFactory(new PropertyValueFactory<>("total"));
 
-    @FXML
-    private TextField txtWeight;
+        try {
+            refreshPage();
+        }catch (Exception e){
+            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "Fail to load supplier id").show();
+        }
+    }
+    private void refreshPage(){
+//        loadNextCustomerId();
+//        loadTableData();
 
+        lblProductType.setLabelFor(comBoxName);
+        lblNetWeight.setLabelFor(comBoxContact);
+        comBoxContact.setValue(null);
+        txtCuttingAmount.setText("0");
+        txtBuyingPrice.setText("0");
+    }
+//    private void loadNextOrderId() throws SQLException {
+//        String nextOrderId = SupplierItemModel.getNextSupplierId();
+//        lblOrderNo.setText(nextCustomerId);
+//    }
     @FXML
     void btnOnActionAddToCart(ActionEvent event) {
 
@@ -113,5 +148,7 @@ public class BuyFormController {
     void comBoxOnActionSearchName1(KeyEvent event) {
 
     }
+
+
 
 }

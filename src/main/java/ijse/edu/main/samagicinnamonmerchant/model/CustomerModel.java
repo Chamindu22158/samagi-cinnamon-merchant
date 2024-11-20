@@ -70,5 +70,32 @@ public class CustomerModel {
     public boolean deleteCustomer(String customerId) throws SQLException {
         return CrudUtil.execute("delete from customer where customerId=?",customerId);
     }
+    public ArrayList<String> getAllCustomerIds() throws SQLException {
+        ResultSet rst = CrudUtil.execute("select customerId from customer");
+
+        ArrayList<String> customerIds = new ArrayList<>();
+
+        while (rst.next()) {
+            customerIds.add(rst.getString(1));
+        }
+
+        return customerIds;
+    }
+
+    public CustomerDTO findById(String selectedCusId) throws SQLException {
+        ResultSet rst = CrudUtil.execute("select * from customer where customerId=?", selectedCusId);
+
+        if (rst.next()) {
+            return new CustomerDTO(
+                    rst.getString(1),
+                    rst.getString(2),
+                    rst.getString(3),
+                    rst.getString(4),
+                    rst.getString(5),
+                    rst.getInt(6)
+            );
+        }
+        return null;
+    }
 }
 

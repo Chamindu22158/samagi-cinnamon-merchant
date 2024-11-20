@@ -58,7 +58,7 @@ public class DashBoardController implements Initializable {
 
     @FXML
     void navigateToOrderPage(ActionEvent event) {
-
+        navigateTo("/view/OrderManage.fxml");
     }
     @FXML
     void navigateToHomePage(ActionEvent event) {

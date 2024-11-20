@@ -11,8 +11,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="478.0" prefWidth="1107.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ijse.edu.main.samagicinnamonmerchant.controller.BuyFormController">
+<AnchorPane fx:id="buyPain" prefHeight="478.0" prefWidth="1107.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ijse.edu.main.samagicinnamonmerchant.controller.BuyFormController">
    <children>
       <Line endX="100.0" endY="257.0" layoutX="194.0" layoutY="221.0" startX="100.0" startY="-166.5" />
       <Button layoutX="26.0" layoutY="59.0" mnemonicParsing="false" onAction="#btnOnActionCinnamon" prefHeight="39.0" prefWidth="116.0" style="-fx-background-color: #f1c40f;" text="Cinnamon">
