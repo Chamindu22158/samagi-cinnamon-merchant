@@ -2,6 +2,7 @@ package ijse.edu.main.samagicinnamonmerchant.model;
 
 
 import ijse.edu.main.samagicinnamonmerchant.dto.ItemDTO;
+import ijse.edu.main.samagicinnamonmerchant.dto.OrderItem;
 import ijse.edu.main.samagicinnamonmerchant.util.CrudUtil;
 
 import java.sql.ResultSet;
@@ -11,11 +12,13 @@ import java.util.ArrayList;
 public class ItemModel {
     public static boolean saveItem(ItemDTO ItemDTO) throws SQLException {
         boolean isSaved = CrudUtil.execute(
-                "INSERT INTO item (itemId,itemName,type,onHandWeight) VALUES(?,?,?,?)",
+                "INSERT INTO item (itemId,itemName,type,onHandWeight,price) VALUES(?,?,?,?,?)",
                 ItemDTO.getItemId(),
                 ItemDTO.getItemName(),
                 ItemDTO.getType(),
-                ItemDTO.getOnHandWeight());
+                ItemDTO.getOnHandWeight(),
+                ItemDTO.getPrice()
+        );
         return isSaved;
     }
 
@@ -36,11 +39,13 @@ public class ItemModel {
 
     public static boolean updateItem(ItemDTO itemDTO) throws SQLException {
         boolean isUpdated = CrudUtil.execute(
-                "UPDATE Item SET itemName=?, type=?, onHandWeight=? WHERE itemId=?",
+                "UPDATE Item SET itemName=?, type=?, onHandWeight=? , price=? WHERE itemId=?",
                 itemDTO.getItemName(),
                 itemDTO.getType(),
                 itemDTO.getOnHandWeight(),
+                itemDTO.getPrice(),
                 itemDTO.getItemId()
+
         );
         return isUpdated;
     }
@@ -55,7 +60,9 @@ public class ItemModel {
                     rst.getString(1),
                     rst.getString(2),
                     rst.getString(3),
-                    rst.getDouble(5)
+                    rst.getDouble(5),
+                    rst.getDouble(6)
+
 
             );
             itemDTOS.add(itemDTO);
@@ -93,12 +100,15 @@ public class ItemModel {
                     rst.getString(1),
                     rst.getString(2),
                     rst.getString(3),
-                    rst.getDouble(5)
+                    rst.getDouble(5),
+                    rst.getDouble(6)
             );
         }
         // Return null if the item is not found
         return null;
     }
-
+    public boolean reduceQty(OrderItem orderItem) throws SQLException {
+        return CrudUtil.execute("UPDATE item SET onHandWeight = onHandWeight - ? WHERE itemId = ?", orderItem.getWeight(), orderItem.getItemId());
+    }
 
 }

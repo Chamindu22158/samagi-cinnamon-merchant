@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -33,7 +34,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Line endX="143.0" layoutX="401.0" layoutY="319.0" startX="-100.0">
+      <Line endX="143.0" layoutX="403.0" layoutY="312.0" startX="-100.0">
          <stroke>
             <LinearGradient endX="1.0" endY="1.0">
                <stops>
@@ -77,13 +78,26 @@
             <Font size="14.0" />
          </font>
       </Text>
-      <Text layoutX="348.0" layoutY="343.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Do you havan't an account ?" wrappingWidth="178.13671875" />
       <Text layoutX="399.0" layoutY="374.0" strokeType="OUTSIDE" strokeWidth="0.0" />
-      <Hyperlink layoutX="381.0" layoutY="358.0" onAction="#hyperOnActionRegister" text="Register here..." />
       <PasswordField fx:id="pstPassword" layoutX="313.0" layoutY="200.0" onAction="#pstOnActionPassword" prefHeight="24.0" prefWidth="223.0" promptText="type password here" style="-fx-background-radius: 5 5 5 5;">
          <font>
             <Font size="14.0" />
          </font>
       </PasswordField>
+      <Label layoutX="316.0" layoutY="320.0" prefHeight="18.0" prefWidth="244.0" text="Do yo want to change password? " textFill="#000000d7">
+         <font>
+            <Font name="System Italic" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="340.0" layoutY="340.0" text="(Click Froget Password)" textFill="#000000d7">
+         <font>
+            <Font name="System Italic" size="14.0" />
+         </font>
+      </Label>
+      <Hyperlink fx:id="hyperPassword" layoutX="350.0" layoutY="363.0" onAction="#hyperlinkFrogetPasswordOnAction" prefHeight="27.0" prefWidth="165.0" text="Frogot Password">
+         <font>
+            <Font name="System Italic" size="15.0" />
+         </font>
+      </Hyperlink>
    </children>
 </AnchorPane>

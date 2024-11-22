@@ -1,16 +1,19 @@
 package ijse.edu.main.samagicinnamonmerchant.controller;
 
+import javafx.animation.Interpolator;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 
 import java.io.IOException;
@@ -21,6 +24,8 @@ public class LoginPageController {
 
     @FXML
     private Button btnLogIn;
+    @FXML
+    private Hyperlink hyperPassword;
 
     @FXML
     private PasswordField pstPassword;
@@ -51,6 +56,28 @@ public class LoginPageController {
     void btnOnActionLogIn(ActionEvent event) throws IOException {
         actionLogIn(event);
     }
+    @FXML
+    void hyperlinkFrogetPasswordOnAction(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/view/forgetPasswordForm1.fxml"));
+        Scene scene = hyperPassword.getScene();
+        root.translateXProperty().set(scene.getWidth());
+
+        AnchorPane parentContainer = (AnchorPane) scene.getRoot();
+
+        // Remove the existing content
+        parentContainer.getChildren().clear();
+
+        // Add the new content
+        parentContainer.getChildren().add(root);
+
+        Timeline timeline = new Timeline();
+        KeyValue keyValue = new KeyValue(root.translateXProperty(), 0, Interpolator.EASE_BOTH);
+        KeyFrame keyFrame = new KeyFrame(Duration.seconds(0.5), keyValue);
+        timeline.getKeyFrames().add(keyFrame);
+        timeline.play();
+
+    }
+
 
     @FXML
     void hyperOnActionRegister(ActionEvent event) {

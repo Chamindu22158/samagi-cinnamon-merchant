@@ -2,6 +2,8 @@ package ijse.edu.main.samagicinnamonmerchant.controller;
 
 import ijse.edu.main.samagicinnamonmerchant.dto.CustomerDTO;
 import ijse.edu.main.samagicinnamonmerchant.dto.ItemDTO;
+import ijse.edu.main.samagicinnamonmerchant.dto.OrderDTO;
+import ijse.edu.main.samagicinnamonmerchant.dto.OrderItem;
 import ijse.edu.main.samagicinnamonmerchant.dto.tm.CartTM;
 import ijse.edu.main.samagicinnamonmerchant.model.CustomerModel;
 import ijse.edu.main.samagicinnamonmerchant.model.ItemModel;
@@ -10,14 +12,21 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
+import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 public class OrderManageController implements Initializable {
@@ -63,9 +72,14 @@ public class OrderManageController implements Initializable {
 
     @FXML
     private Label orderDate;
+    @FXML
+    private TextField txtWeight;
 
     @FXML
     private TableView<CartTM> tblCart;
+
+    @FXML
+    private TableColumn<?, ?> colWeight;
 
     @FXML
     private TextField txtAddToCartQty;
@@ -82,8 +96,9 @@ public class OrderManageController implements Initializable {
     void btnAddToCartOnAction(ActionEvent event) {
         String selectedItemId = cmbItemId.getValue();
         String itemName = lblItemName.getText();
-        double unitPrice = Double.parseDouble(txtUnitPrice.getText());
-        int qtyOnHand = Integer.parseInt(txtAddToCartQty.getText());
+        double unitPrice = Double.parseDouble(lblItemPrice.getText());
+        double weight = Double.parseDouble(txtWeight.getText());
+
 
 
         // If no item is selected, show an error alert and return
@@ -92,7 +107,7 @@ public class OrderManageController implements Initializable {
             return; // Exit the method if no item is selected.
         }
 
-        String cartQtyString = txtAddToCartQty.getText();
+        String cartQtyString = txtWeight.getText();
 
         String qtyPattern = "^[0-9]+$";
 
@@ -107,13 +122,13 @@ public class OrderManageController implements Initializable {
 
 
         // Check if there are enough items in stock; if not, show an error alert and return
-        if (qtyOnHand < cartQty) {
-            new Alert(Alert.AlertType.ERROR, "Not enough items..!").show();
-            return; // Exit the method if there's insufficient stock.
-        }
+//        if (qtyOnHand < cartQty) {
+//            new Alert(Alert.AlertType.ERROR, "Not enough items..!").show();
+//            return; // Exit the method if there's insufficient stock.
+//        }
 
         // Clear the text field for adding quantity after retrieving the input value.
-        txtAddToCartQty.setText("");
+        txtWeight.setText("");
 
 
         double total = unitPrice * cartQty;
@@ -124,8 +139,8 @@ public class OrderManageController implements Initializable {
             // Check if the item is already in the cart
             if (cartTM.getItemId().equals(selectedItemId)) {
                 // Update the existing CartTM object in the cart's observable list with the new quantity and total.
-                int newQty = cartTM.getQty() + cartQty;
-                cartTM.setQty(newQty); // Add the new quantity to the existing quantity in the cart.
+                int newQty = (int) (cartTM.getWeight() + cartQty);
+                cartTM.setWeight(newQty); // Add the new quantity to the existing quantity in the cart.
                 cartTM.setTotal(unitPrice * newQty); // Recalculate the total price based on the updated quantity
 
                 // Refresh the table to display the updated information.
@@ -142,7 +157,7 @@ public class OrderManageController implements Initializable {
         CartTM newCartTM = new CartTM(
                 selectedItemId,
                 itemName,
-                cartQty,
+                weight,
                 unitPrice,
                 total,
                 btn
@@ -164,13 +179,60 @@ public class OrderManageController implements Initializable {
     }
 
     @FXML
-    void btnPlaceOrderOnAction(ActionEvent event) {
+    void btnPlaceOrderOnAction(ActionEvent event) throws SQLException, IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/PaymentInfoForm.fxml"));
+        Parent rootNode = loader.load();
 
+        Stage stage = new Stage();
+        stage.setScene(new Scene(rootNode));
+        stage.centerOnScreen();
+        stage.show();
+
+        if (tblCart.getItems().isEmpty()) {
+            new Alert(Alert.AlertType.ERROR, "Cart is empty..!").show();
+            return;
+        }
+        if (cmbCustomerId.getSelectionModel().isEmpty()) {
+            new Alert(Alert.AlertType.ERROR, "Please select customer..!").show();
+            return;
+        }
+        String orderId = lblOrderId.getText();
+        String customerId = cmbCustomerId.getValue();
+        Date date = java.sql.Date.valueOf(orderDate.getText());
+
+
+        ArrayList<OrderItem> orderItemsDTOS = new ArrayList<>();
+        for (CartTM cartTM : cartTMS) {
+            OrderItem orderItems = new OrderItem(
+
+                    cartTM.getItemId(),
+                    orderId,
+                    cartTM.getItemName(),
+                    cartTM.getWeight()
+
+            );
+            orderItemsDTOS.add(orderItems);
+        }
+        OrderDTO orderDTO = new OrderDTO(
+                orderId,
+                customerId,
+                date,
+                orderItemsDTOS
+        );
+
+        boolean isSaved = orderModel.saveOrder(orderDTO);
+        System.out.println(isSaved);
+        if (isSaved) {
+            new Alert(Alert.AlertType.CONFIRMATION, "Order placed successfully..!").show();
+            refreshPage();
+        } else {
+            new Alert(Alert.AlertType.ERROR, "Fail to place order..!").show();
+        }
     }
 
     @FXML
-    void btnResetOnAction(ActionEvent event) {
-
+    void btnResetOnAction(ActionEvent event) throws SQLException {
+        refreshPage();
     }
 
     @FXML
@@ -195,6 +257,7 @@ public class OrderManageController implements Initializable {
             // FIll item related labels
             lblItemName.setText(itemDTO.getItemName());
             lblItemQty.setText(String.valueOf(itemDTO.getOnHandWeight()));
+            lblItemPrice.setText(String.valueOf(itemDTO.getPrice()));
 
         }
     }
@@ -214,7 +277,7 @@ public class OrderManageController implements Initializable {
 
         colItemId.setCellValueFactory(new PropertyValueFactory<>("itemId"));
         colName.setCellValueFactory(new PropertyValueFactory<>("itemName"));
-        colQuantity.setCellValueFactory(new PropertyValueFactory<>("cartQuantity"));
+        colWeight.setCellValueFactory(new PropertyValueFactory<>("weight"));
         colPrice.setCellValueFactory(new PropertyValueFactory<>("unitPrice"));
         colTotal.setCellValueFactory(new PropertyValueFactory<>("total"));
         colAction.setCellValueFactory(new PropertyValueFactory<>("removeBtn"));
@@ -236,8 +299,8 @@ public class OrderManageController implements Initializable {
         cmbItemId.getSelectionModel().clearSelection();
         lblItemName.setText("");
         lblItemQty.setText("");
-        txtUnitPrice.setText("");
-        txtAddToCartQty.setText("");
+        txtWeight.setText("");
+        lblItemPrice.setText("");
         lblCustomerName.setText("");
 
 

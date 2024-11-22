@@ -2,6 +2,7 @@ package ijse.edu.main.samagicinnamonmerchant.dto;
 
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 @Getter
@@ -12,9 +13,6 @@ import java.util.Date;
 public class OrderDTO {
     private String orderId;
     private String customerId;
-    private int qty;
     private Date date;
-    private Date handOverDate;
-    private String status;
-
+    private ArrayList<OrderItem> orderItemsDTOS;
 }

@@ -166,15 +166,52 @@ public class CustomerContoller implements Initializable {
         String CusContact = txtPhone.getText();
         String CusAddress = txtAddress.getText();
 
-        CustomerDTO customerDTO = new CustomerDTO(CusId, CusName, CusAddress, CusContact, CusEmail,CusNic);
+        txtName.setStyle(txtName.getStyle()+";-fx-border-color: #7367F0;");
+        txtNic.setStyle(txtNic.getStyle()+";-fx-border-color: #7367F0;");
+        txtEmail.setStyle(txtEmail.getStyle()+";-fx-border-color: #7367F0;");
+        txtPhone.setStyle(txtPhone.getStyle()+";-fx-border-color: #7367F0;");
 
-        boolean isSaved = customerModel.saveCustomer(customerDTO);
-        if (isSaved){
-            new Alert(Alert.AlertType.CONFIRMATION, "Customer Saved").show();
-            refreshPage();
-        }else {
-            new Alert(Alert.AlertType.ERROR, "Fail to save customer").show();
+        String namePattern = "^[A-Za-z ]+$";
+        String nicPattern = "^[0-9]{9}[vVxX]||[0-9]{12}$";
+        String emailPattern = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
+        String phonePattern = "^07[0-9]\\d{7}$\n";
+
+        boolean isValidName = CusName.matches(namePattern);
+        boolean isValidNic = String.valueOf(CusNic).matches(nicPattern);
+        boolean isValidEmail = CusEmail.matches(emailPattern);
+        boolean isValidPhone = CusContact.matches(phonePattern);
+        if (!isValidName){
+            System.out.println(txtName.getStyle());
+            txtName.setStyle(txtName.getStyle()+";-fx-border-color: red;");
+            System.out.println("Invalid name.............");
+//            return;
         }
+
+        if (!isValidNic){
+            txtNic.setStyle(txtNic.getStyle()+";-fx-border-color: red;");
+//            return;
+        }
+
+        if (!isValidEmail){
+            txtEmail.setStyle(txtEmail.getStyle()+";-fx-border-color: red;");
+        }
+
+        if (!isValidPhone){
+            txtPhone.setStyle(txtPhone.getStyle()+";-fx-border-color: red;");
+        }
+
+        if (isValidName && isValidNic && isValidEmail && isValidPhone){
+            CustomerDTO customerDTO = new CustomerDTO(CusId, CusName, CusAddress, CusContact, CusEmail,CusNic);
+
+            boolean isSaved = customerModel.saveCustomer(customerDTO);
+            if (isSaved){
+                new Alert(Alert.AlertType.CONFIRMATION, "Customer Saved").show();
+                refreshPage();
+            }else {
+                new Alert(Alert.AlertType.ERROR, "Fail to save customer").show();
+            }
+        }
+
 
     }
 

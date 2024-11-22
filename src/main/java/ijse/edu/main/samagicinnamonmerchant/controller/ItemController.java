@@ -53,6 +53,9 @@ public class ItemController  implements Initializable {
     private TableColumn<?, ?> colType;
 
     @FXML
+    private TableColumn<?, ?> colItemPrice;
+
+    @FXML
     private JFXComboBox<String> comBoxType;
 
     @FXML
@@ -62,8 +65,12 @@ public class ItemController  implements Initializable {
     @FXML
     private TextField txtItemName;
 
+
     @FXML
-    private Text txtName;
+    private TextField txtPrice;
+
+    @FXML
+    private Button btnReset;
 
     @FXML
     private TextField txtOnHandWeight;
@@ -73,6 +80,7 @@ public class ItemController  implements Initializable {
         colItemName.setCellValueFactory(new PropertyValueFactory<>("itemName"));
         colType.setCellValueFactory(new PropertyValueFactory<>("type"));
         colOnHandWeight.setCellValueFactory(new PropertyValueFactory<>("onHandWeight"));
+        colItemPrice.setCellValueFactory(new PropertyValueFactory<>("Price"));
 
         try {
             refreshPage();
@@ -87,6 +95,7 @@ public class ItemController  implements Initializable {
         txtItemName.setText("");
         comBoxType.setValue(null);
         txtOnHandWeight.setText("");
+        txtPrice.setText("");
 
         loadNextItemId();
         loadTableData();
@@ -119,7 +128,8 @@ public class ItemController  implements Initializable {
                     itemDTO.getItemId(),
                     itemDTO.getItemName(),
                     itemDTO.getType(),
-                   itemDTO.getOnHandWeight()
+                   itemDTO.getOnHandWeight(),
+                   itemDTO.getPrice()
 
             );
             itemTMS.add(itemTM);
@@ -132,7 +142,9 @@ public class ItemController  implements Initializable {
         String itemName = txtItemName.getText();
         double onHandWeight = Double.parseDouble(txtOnHandWeight.getText());
         String type = comBoxType.getValue();
-        ItemDTO itemDTO = new ItemDTO(itemId, itemName, type, onHandWeight);
+        double price = Double.parseDouble(txtPrice.getText());
+
+        ItemDTO itemDTO = new ItemDTO(itemId, itemName, type, onHandWeight,price);
 
         boolean isSaved = ItemModel.saveItem(itemDTO);
         if (isSaved) {
@@ -166,6 +178,11 @@ public class ItemController  implements Initializable {
     void btnOnActionSave(MouseEvent event) {
 
     }
+    @FXML
+    void btnOnActionReset(ActionEvent event) throws SQLException {
+        refreshPage();
+    }
+
 
     @FXML
     void btnOnActionUpdate(ActionEvent event) throws SQLException {
@@ -173,8 +190,9 @@ public class ItemController  implements Initializable {
         String itemName = txtItemName.getText();
         String type = comBoxType.getValue().toString();
         double onHandWeight = Double.parseDouble(txtOnHandWeight.getText());
+        double price = Double.parseDouble(txtPrice.getText());
 
-        ItemDTO itemDTO = new ItemDTO(itemId, itemName, type, onHandWeight);
+        ItemDTO itemDTO = new ItemDTO(itemId, itemName, type, onHandWeight,price);
 
         boolean isUpdated = ItemModel.updateItem(itemDTO);
         if (isUpdated) {
@@ -192,6 +210,7 @@ public class ItemController  implements Initializable {
             txtItemName.setText(itemTM.getItemName());
             comBoxType.setValue(itemTM.getType());
             txtOnHandWeight.setText(String.valueOf(itemTM.getOnHandWeight()));
+            txtPrice.setText(String.valueOf(itemTM.getPrice()));
         }
     }
     @FXML

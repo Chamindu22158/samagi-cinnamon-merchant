@@ -14,4 +14,7 @@ public class ItemDTO {
     private String itemName;
     private String type;
     private double onHandWeight;
+    private double price;
+
+
 }

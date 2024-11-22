@@ -62,7 +62,7 @@ public class DashBoardController implements Initializable {
     }
     @FXML
     void navigateToHomePage(ActionEvent event) {
-
+        navigateTo("/view/HomePage.fxml");
     }
 
     @FXML

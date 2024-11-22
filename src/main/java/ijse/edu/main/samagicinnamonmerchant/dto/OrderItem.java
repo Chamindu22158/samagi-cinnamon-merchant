@@ -2,6 +2,8 @@ package ijse.edu.main.samagicinnamonmerchant.dto;
 
 import lombok.*;
 
+import java.util.Date;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -11,5 +13,5 @@ public class OrderItem {
     private String itemId;
     private String orderId;
     private String itemName;
-    private int weight;
+    private double weight;
 }

@@ -13,4 +13,7 @@ public class ItemTM {
     private String itemName;
     private String type;
     private double onHandWeight;
+    private double price;
+
+
 }

@@ -12,7 +12,7 @@ import lombok.*;
 public class CartTM {
     private String itemId;
     private String itemName;
-    private int qty;
+    private double weight;
     private double unitPrice;
     private double total;
     private Button removeBtn;

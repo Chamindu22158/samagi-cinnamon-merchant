@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXComboBox?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -15,8 +15,8 @@
       <TableView fx:id="tblPayment" layoutX="37.0" layoutY="80.0" prefHeight="144.0" prefWidth="1059.0">
          <columns>
             <TableColumn fx:id="colPaymentNo" prefWidth="79.20001220703125" text="PaymentID" />
-            <TableColumn fx:id="colSupId" prefWidth="66.0" text="SupplierID" />
-            <TableColumn fx:id="colDate" prefWidth="107.0" text="Date" />
+            <TableColumn fx:id="colCusId" prefWidth="76.0" text="Customer ID" />
+            <TableColumn fx:id="colDate" prefWidth="97.0" text="Date" />
             <TableColumn fx:id="colTotalAmount" prefWidth="126.0" text="Total Amount (Rs.)" />
             <TableColumn fx:id="colAdvance" prefWidth="120.0" text="Advance" />
             <TableColumn fx:id="colAmountToBePay" prefWidth="122.0" text="Amount to Be pay" />
@@ -84,8 +84,6 @@
             <Font size="15.0" />
          </font>
       </TextField>
-      <ComboBox layoutX="149.0" layoutY="269.0" prefWidth="150.0" />
-      <ComboBox layoutX="556.0" layoutY="315.0" prefWidth="150.0" />
       <Button fx:id="btnSave" layoutX="394.0" layoutY="400.0" mnemonicParsing="false" onAction="#btnOnActionSave" prefHeight="39.0" prefWidth="129.0" style="-fx-background-color: #009e05;" text="Save" textFill="WHITE">
          <font>
             <Font name="System Bold Italic" size="18.0" />
@@ -101,5 +99,7 @@
             <Font name="System Bold Italic" size="18.0" />
          </font>
       </Button>
+      <JFXComboBox fx:id="comBoxType" layoutX="570.0" layoutY="316.0" prefHeight="25.0" prefWidth="170.0" />
+      <Label fx:id="lblPaymentId" layoutX="149.0" layoutY="266.0" prefHeight="25.0" prefWidth="74.0" />
    </children>
 </AnchorPane>
