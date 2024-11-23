@@ -7,31 +7,22 @@
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane prefHeight="447.0" prefWidth="1107.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller=
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ijse.edu.main.samagicinnamonmerchant.controller.HomePage">
    <children>
-      <ImageView fitHeight="358.0" fitWidth="411.0" layoutX="359.0" layoutY="65.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../image/samagi.png" />
-         </image>
-      </ImageView>
-      <AnchorPane layoutX="-2.0" prefHeight="55.0" prefWidth="1118.0" style="-fx-background-color: #1e272e;">
+      <AnchorPane prefHeight="53.0" prefWidth="1111.0" style="-fx-background-color: #1e272e;">
          <children>
-            <Label alignment="CENTER" layoutX="477.0" layoutY="10.0" text="Home Page" textFill="WHITE">
+            <Label alignment="CENTER" layoutX="423.0" layoutY="9.0" text="Home FORM" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="744.0" layoutY="65.0" opacity="0.89" prefHeight="35.0" prefWidth="358.0" style="-fx-background-color: #487eb0; -fx-background-radius: 15 15 15 15;">
-         <children>
-            <ImageView fx:id="wishImageView" fitHeight="35.0" fitWidth="55.0" layoutX="252.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true" />
-            <Label fx:id="lblGreetings" layoutX="42.0" layoutY="2.0" prefHeight="35.0" prefWidth="216.0" text="Good Morning...">
-               <font>
-                  <Font size="26.0" />
-               </font>
-            </Label>
-         </children>
-      </AnchorPane>
+      <ImageView fitHeight="308.0" fitWidth="459.0" layoutX="359.0" layoutY="65.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/samagi.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="lblDate" layoutX="970.0" layoutY="65.0" prefHeight="28.0" prefWidth="109.0" />
    </children>
 </AnchorPane>

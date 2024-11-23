@@ -11,27 +11,27 @@
 <AnchorPane prefHeight="600.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ijse.edu.main.samagicinnamonmerchant.controller.DashBoardController">
    <children>
       <AnchorPane fx:id="content" layoutX="-1.0" layoutY="153.0" prefHeight="447.0" prefWidth="1107.0" />
-      <Button fx:id="btnCustomer" layoutX="592.0" layoutY="70.0" mnemonicParsing="false" onAction="#navigateToCustomerPage" text="Customer">
+      <Button fx:id="btnCustomer" layoutX="611.0" layoutY="70.0" mnemonicParsing="false" onAction="#navigateToCustomerPage" text="Customer">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="btnItem" layoutX="500.0" layoutY="70.0" mnemonicParsing="false" onAction="#navigateToItemPage" text="Item">
+      <Button fx:id="btnItem" layoutX="490.0" layoutY="70.0" mnemonicParsing="false" onAction="#navigateToItemPage" text="Item">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="btnSupplier" layoutX="286.0" layoutY="70.0" mnemonicParsing="false" onAction="#navigateToSupplierPage" text="Supplier">
+      <Button fx:id="btnSupplier" layoutX="327.0" layoutY="70.0" mnemonicParsing="false" onAction="#navigateToSupplierPage" text="Supplier">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="btnOrder" layoutX="737.0" layoutY="70.0" mnemonicParsing="false" onAction="#navigateToOrderPage" text="Order">
+      <Button fx:id="btnOrder" layoutX="785.0" layoutY="70.0" mnemonicParsing="false" onAction="#navigateToOrderPage" text="Order">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="btnPayment" layoutX="854.0" layoutY="70.0" mnemonicParsing="false" onAction="#navigateToPaymentPage" text="Payment">
+      <Button fx:id="btnPayment" layoutX="910.0" layoutY="70.0" mnemonicParsing="false" onAction="#navigateToPaymentPage" text="Payment">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
@@ -51,11 +51,6 @@
             <Image url="@../image/samagi.png" />
          </image></ImageView>
       <Button layoutX="192.0" layoutY="70.0" mnemonicParsing="false" onAction="#navigateToHomePage" text="Home">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Button>
-      <Button fx:id="btnBuy" layoutX="407.0" layoutY="70.0" mnemonicParsing="false" onAction="#navigateToBuyingPage" text="Buy">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
