@@ -35,7 +35,7 @@ public class SupplierModel {
                     rst.getString(3),
                     rst.getString(4),
                     rst.getString(5),
-                    rst.getInt(6)
+                    rst.getString(6)
             );
             supplierDTOS.add(supplierDTO);
         }

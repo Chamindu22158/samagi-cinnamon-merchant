@@ -1,5 +1,6 @@
 package ijse.edu.main.samagicinnamonmerchant.controller;
 
+import ijse.edu.main.samagicinnamonmerchant.db.DBConnection;
 import ijse.edu.main.samagicinnamonmerchant.dto.CustomerDTO;
 import ijse.edu.main.samagicinnamonmerchant.dto.ItemDTO;
 import ijse.edu.main.samagicinnamonmerchant.dto.OrderDTO;
@@ -19,15 +20,17 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class OrderManageController implements Initializable {
 
@@ -71,6 +74,9 @@ public class OrderManageController implements Initializable {
     private Label lblOrderId;
 
     @FXML
+    private Label lblTotal;
+
+    @FXML
     private Label orderDate;
     @FXML
     private TextField txtWeight;
@@ -90,6 +96,11 @@ public class OrderManageController implements Initializable {
     private final CustomerModel customerModel = new CustomerModel();
     private final ItemModel itemModel = new ItemModel();
 
+    public static String orderId1;
+    public static String StaticCustomerId1;
+    public static String StaticTotal1;
+
+
     private final ObservableList<CartTM> cartTMS = FXCollections.observableArrayList();
 
     @FXML
@@ -98,6 +109,8 @@ public class OrderManageController implements Initializable {
         String itemName = lblItemName.getText();
         double unitPrice = Double.parseDouble(lblItemPrice.getText());
         double weight = Double.parseDouble(txtWeight.getText());
+
+
 
 
 
@@ -136,6 +149,7 @@ public class OrderManageController implements Initializable {
         // Loop through each item in cart's observable list.
         for (CartTM cartTM : cartTMS) {
 
+
             // Check if the item is already in the cart
             if (cartTM.getItemId().equals(selectedItemId)) {
                 // Update the existing CartTM object in the cart's observable list with the new quantity and total.
@@ -144,7 +158,10 @@ public class OrderManageController implements Initializable {
                 cartTM.setTotal(unitPrice * newQty); // Recalculate the total price based on the updated quantity
 
                 // Refresh the table to display the updated information.
+
+
                 tblCart.refresh();
+
                 return; // Exit the method as the cart item has been updated.
             }
         }
@@ -170,23 +187,29 @@ public class OrderManageController implements Initializable {
             cartTMS.remove(newCartTM);
 
             // Refresh the table to reflect the removal of the item.
+
             tblCart.refresh();
         });
 
         // Add the newly created CartTM object to the cart's observable list.
         cartTMS.add(newCartTM);
+        calculateNetTotal();
+
+    }
+    private void calculateNetTotal() {
+        int netTotal = 0;
+        for (int i = 0; i < tblCart.getItems().size(); i++) {
+            netTotal += (double) colTotal.getCellData(i);
+        }
+        lblTotal.setText(String.valueOf(netTotal));
+
 
     }
 
     @FXML
-    void btnPlaceOrderOnAction(ActionEvent event) throws SQLException, IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/PaymentInfoForm.fxml"));
-        Parent rootNode = loader.load();
+    void btnPlaceOrderOnAction(ActionEvent event) throws SQLException, IOException, JRException {
 
-        Stage stage = new Stage();
-        stage.setScene(new Scene(rootNode));
-        stage.centerOnScreen();
-        stage.show();
+
 
         if (tblCart.getItems().isEmpty()) {
             new Alert(Alert.AlertType.ERROR, "Cart is empty..!").show();
@@ -198,7 +221,12 @@ public class OrderManageController implements Initializable {
         }
         String orderId = lblOrderId.getText();
         String customerId = cmbCustomerId.getValue();
+        System.out.println("orderId = " +lblTotal.getText());
         Date date = java.sql.Date.valueOf(orderDate.getText());
+        String total = lblTotal.getText();
+        StaticCustomerId1 = customerId;
+        orderId1 = orderId;
+        StaticTotal1 =total;
 
 
         ArrayList<OrderItem> orderItemsDTOS = new ArrayList<>();
@@ -220,10 +248,20 @@ public class OrderManageController implements Initializable {
                 orderItemsDTOS
         );
 
+
+
         boolean isSaved = orderModel.saveOrder(orderDTO);
         System.out.println(isSaved);
         if (isSaved) {
+
             new Alert(Alert.AlertType.CONFIRMATION, "Order placed successfully..!").show();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/PaymentInfoForm.fxml"));
+            Parent rootNode = loader.load();
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(rootNode));
+            stage.centerOnScreen();
+            stage.show();
             refreshPage();
         } else {
             new Alert(Alert.AlertType.ERROR, "Fail to place order..!").show();
@@ -287,6 +325,8 @@ public class OrderManageController implements Initializable {
     }
     private void refreshPage() throws SQLException {
         lblOrderId.setText(orderModel.getNextOrderId());
+
+        System.out.println(StaticCustomerId1+" "+orderId1+" "+StaticTotal1);
 
         orderDate.setText(LocalDate.now().toString());
 

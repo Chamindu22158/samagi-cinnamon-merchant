@@ -161,7 +161,7 @@ public class CustomerContoller implements Initializable {
     void btnOnActionSave(ActionEvent event)  throws SQLException {
         String CusId = txtCustomerId.getText();
         String CusName = txtName.getText();
-        int CusNic = Integer.parseInt(txtNic.getText());
+        String CusNic = txtNic.getText();
         String CusEmail = txtEmail.getText();
         String CusContact = txtPhone.getText();
         String CusAddress = txtAddress.getText();
@@ -174,7 +174,7 @@ public class CustomerContoller implements Initializable {
         String namePattern = "^[A-Za-z ]+$";
         String nicPattern = "^[0-9]{9}[vVxX]||[0-9]{12}$";
         String emailPattern = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
-        String phonePattern = "^07[0-9]\\d{7}$\n";
+        String phonePattern = "^(\\d+)||((\\d+\\.)(\\d){2})$";
 
         boolean isValidName = CusName.matches(namePattern);
         boolean isValidNic = String.valueOf(CusNic).matches(nicPattern);
@@ -197,8 +197,8 @@ public class CustomerContoller implements Initializable {
         }
 
         if (!isValidPhone){
-            txtPhone.setStyle(txtPhone.getStyle()+";-fx-border-color: red;");
         }
+        txtPhone.setStyle(txtPhone.getStyle()+";-fx-border-color: red;");
 
         if (isValidName && isValidNic && isValidEmail && isValidPhone){
             CustomerDTO customerDTO = new CustomerDTO(CusId, CusName, CusAddress, CusContact, CusEmail,CusNic);
@@ -219,7 +219,7 @@ public class CustomerContoller implements Initializable {
     void btnOnActionUpdate(ActionEvent event) throws SQLException {
         String CusId = txtCustomerId.getText();
         String CusName = txtName.getText();
-        int CusNic = Integer.parseInt(txtNic.getText());
+        String CusNic = txtNic.getText();
         String CusEmail = txtEmail.getText();
         String CusContact = txtPhone.getText();
         String CusAddress = txtAddress.getText();
@@ -241,7 +241,7 @@ public class CustomerContoller implements Initializable {
         if (customerTM != null){
             txtCustomerId.setText(customerTM.getCustomerId());
             txtName.setText(customerTM.getName());
-            txtNic.setText(String.valueOf(customerTM.getNic()));
+           txtNic.setText(customerTM.getNic());
             txtEmail.setText(customerTM.getEmail());
             txtPhone.setText(customerTM.getContact());
             txtAddress.setText(customerTM.getAddress());

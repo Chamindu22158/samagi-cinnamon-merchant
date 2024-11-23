@@ -22,6 +22,26 @@ public class PaymentModel {
         }
         return  "P001";
     }
+    public boolean deletePayment(String paymentId) throws SQLException {
+        return CrudUtil.execute("delete from payment where paymentId=?",paymentId);
+    }
+
+    public boolean addPayment(PaymentDTO paymentDTO) throws SQLException {
+        boolean isSaved = CrudUtil.execute(
+                "INSERT INTO payment VALUES(?,?,?,?,?,?,?,?,?,?)",
+               paymentDTO.getPaymentId(),
+                paymentDTO.getCustomerId(),
+                paymentDTO.getOrderId(),
+                paymentDTO.getTotalAmount(),
+                paymentDTO.getDate(),
+                paymentDTO.getAdvance(),
+                paymentDTO.getAmountToBePay(),
+                paymentDTO.getPaymentType(),
+                paymentDTO.getDescription(),
+                paymentDTO.getStatus()
+        );
+        return isSaved;
+    }
     public ArrayList<PaymentDTO> getAllPayments() throws SQLException {
         ResultSet rst =  CrudUtil.execute("select * from payment");
 
@@ -31,12 +51,15 @@ public class PaymentModel {
             PaymentDTO paymentDTO = new PaymentDTO(
                     rst.getString(1),
                     rst.getString(2),
-                    rst.getDate(3),
+                    rst.getString(3),
                     rst.getDouble(4),
-                    rst.getDouble(5),
+                    rst.getDate(5),
                     rst.getDouble(6),
-                    rst.getString(7),
-                    rst.getString(8));
+                    rst.getDouble(7),
+                    rst.getString(8),
+                    rst.getString(9),
+                    rst.getString(10)
+            );
             paymentDTOS.add(paymentDTO);
         }
 

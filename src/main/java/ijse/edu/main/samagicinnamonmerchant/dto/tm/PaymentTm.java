@@ -1,15 +1,14 @@
-package ijse.edu.main.samagicinnamonmerchant.dto;
+package ijse.edu.main.samagicinnamonmerchant.dto.tm;
 
 import lombok.*;
 
 import java.util.Date;
-
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class PaymentDTO {
+public class PaymentTm {
     private String paymentId;
     private String customerId;
     private String orderId;
@@ -20,5 +19,8 @@ public class PaymentDTO {
     private String paymentType;
     private String description;
     private String status;
+
+
+
 
 }

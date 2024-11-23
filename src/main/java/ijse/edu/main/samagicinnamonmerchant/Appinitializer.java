@@ -15,7 +15,7 @@ public class Appinitializer extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(this.getClass().getResource("/view/LoginPage.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(this.getClass().getResource("/view/dashBoard.fxml")));
         stage.setScene(new Scene(root));
         stage.setTitle("Samagi Cinnamon Merchant");
         stage.centerOnScreen();

@@ -5,6 +5,7 @@ module ijse.edu.main.samagicinnamonmerchant {
     requires java.sql;
     requires static lombok;
     requires com.jfoenix;
+    requires jasperreports;
 
 
     opens ijse.edu.main.samagicinnamonmerchant.controller to javafx.fxml;

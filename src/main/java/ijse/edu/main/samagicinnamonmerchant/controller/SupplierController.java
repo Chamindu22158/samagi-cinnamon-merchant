@@ -152,14 +152,52 @@ public class SupplierController implements Initializable {
         String address = txtAddress.getText();
         String email = txtEmail.getText();
         String contact = txtContact.getText();
-        int nic = Integer.parseInt(txtNic.getText());
-        SupplierDTO supplierDTO = new SupplierDTO(supplierId, name, address, email, contact, nic);
-        boolean isSaved = supplierModel.saveSupplier(supplierDTO);
-        if (isSaved) {
-            new Alert(Alert.AlertType.CONFIRMATION, "Supplier Saved").show();
-            refreshPage();
-        } else {
-            new Alert(Alert.AlertType.ERROR, "Fail to save supplier").show();
+        String nic = txtNic.getText();
+
+        txtName.setStyle(txtName.getStyle()+";-fx-border-color: #7367F0;");
+        txtNic.setStyle(txtNic.getStyle()+";-fx-border-color: #7367F0;");
+        txtEmail.setStyle(txtEmail.getStyle()+";-fx-border-color: #7367F0;");
+        txtContact.setStyle(txtContact.getStyle()+";-fx-border-color: #7367F0;");
+
+        String namePattern = "^[A-Za-z ]+$";
+        String nicPattern = "^[0-9]{9}[vVxX]||[0-9]{12}$";
+        String emailPattern = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
+        String phonePattern = "^(\\d+)||((\\d+\\.)(\\d){2})$";
+
+        boolean isValidName = name.matches(namePattern);
+        boolean isValidNic = String.valueOf(nic).matches(nicPattern);
+        boolean isValidEmail = email.matches(emailPattern);
+        boolean isValidPhone = contact.matches(phonePattern);
+
+        if (!isValidName){
+            System.out.println(txtName.getStyle());
+            txtName.setStyle(txtName.getStyle()+";-fx-border-color: red;");
+            System.out.println("Invalid name.............");
+//            return;
+        }
+
+        if (!isValidNic){
+            txtNic.setStyle(txtNic.getStyle()+";-fx-border-color: red;");
+//            return;
+        }
+
+        if (!isValidEmail){
+            txtEmail.setStyle(txtEmail.getStyle()+";-fx-border-color: red;");
+        }
+
+        if (!isValidPhone){
+            txtContact.setStyle(txtContact.getStyle()+";-fx-border-color: red;");
+        }
+
+        if (isValidName && isValidNic && isValidEmail && isValidPhone) {
+            SupplierDTO supplierDTO = new SupplierDTO(supplierId, name, address, email, contact, nic);
+            boolean isSaved = supplierModel.saveSupplier(supplierDTO);
+            if (isSaved) {
+                new Alert(Alert.AlertType.CONFIRMATION, "Supplier Saved").show();
+                refreshPage();
+            } else {
+                new Alert(Alert.AlertType.ERROR, "Fail to save supplier").show();
+            }
         }
     }
 
@@ -170,7 +208,7 @@ public class SupplierController implements Initializable {
         String address = txtAddress.getText();
         String email = txtEmail.getText();
         String contact = txtContact.getText();
-        int nic = Integer.parseInt(txtNic.getText());
+        String nic = txtNic.getText();
         SupplierDTO supplierDTO = new SupplierDTO(supplierId, name, address, email, contact, nic);
         boolean isUpdated = supplierModel.updateSupplier(supplierDTO);
         if (isUpdated) {
@@ -225,7 +263,7 @@ public class SupplierController implements Initializable {
                 txtAddress.setText(supplierTM.getAddress());
                 txtEmail.setText(supplierTM.getEmail());
                 txtContact.setText(supplierTM.getContact());
-                txtNic.setText(String.valueOf(supplierTM.getNic()));
+                txtNic.setText(supplierTM.getNic());
 
                 btnSave.setDisable(true);
                 btnDelete.setDisable(false);

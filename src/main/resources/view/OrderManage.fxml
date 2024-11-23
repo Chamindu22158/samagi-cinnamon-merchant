@@ -73,12 +73,12 @@
             <Font name="Calibri" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="22.0" layoutY="171.0" prefHeight="28.0" prefWidth="169.0" text="On Hand Weight">
+      <Label layoutX="22.0" layoutY="163.0" prefHeight="28.0" prefWidth="169.0" text="On Hand Weight">
          <font>
             <Font name="Calibri Bold" size="24.0" />
          </font>
       </Label>
-      <Label fx:id="lblItemQty" layoutX="211.0" layoutY="172.0" prefHeight="26.0" prefWidth="106.0">
+      <Label fx:id="lblItemQty" layoutX="211.0" layoutY="164.0" prefHeight="26.0" prefWidth="106.0">
          <font>
             <Font name="Calibri" size="18.0" />
          </font>
@@ -88,7 +88,7 @@
             <Font name="Calibri Bold" size="24.0" />
          </font>
       </Label>
-      <Label layoutX="360.0" layoutY="171.0" prefHeight="28.0" prefWidth="93.0" text="Weight">
+      <Label layoutX="360.0" layoutY="163.0" prefHeight="28.0" prefWidth="93.0" text="Weight">
          <font>
             <Font name="Calibri Bold" size="24.0" />
          </font>
@@ -101,7 +101,7 @@
             <Cursor fx:constant="CLOSED_HAND" />
          </cursor>
       </Button>
-      <TableView fx:id="tblCart" layoutX="36.0" layoutY="225.0" prefHeight="200.0" prefWidth="649.0">
+      <TableView fx:id="tblCart" layoutX="36.0" layoutY="204.0" prefHeight="178.0" prefWidth="649.0">
          <columns>
             <TableColumn fx:id="colItemId" prefWidth="75.0" text="Item Id" />
             <TableColumn fx:id="colName" prefWidth="75.0" text="Name" />
@@ -135,6 +135,16 @@
             <Font name="Calibri" size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="txtWeight" layoutX="462.0" layoutY="173.0" />
+      <TextField fx:id="txtWeight" layoutX="462.0" layoutY="165.0" />
+      <Label layoutX="46.0" layoutY="404.0" text="Total (RS):">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblTotal" layoutX="154.0" layoutY="404.0" prefHeight="17.0" prefWidth="134.0" textFill="#063d80">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

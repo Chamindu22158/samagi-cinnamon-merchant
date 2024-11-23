@@ -14,5 +14,5 @@ public class CustomerTM {
     private String Address;
     private String contact;
     private String email;
-    private int nic;
+    private String nic;
 }
